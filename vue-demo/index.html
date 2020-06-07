@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="num">
+        <h1>{{name}} , 非常帅. 有{{num}}个人给他点赞</h1>
+        <button @click="num++">点赞</button>
+        <button @click="cancle">取消点赞</button>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data:{
+                name: "fire",
+                num: 1
+            },
+            methods:{
+                cancle(){
+                    this.num --;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
