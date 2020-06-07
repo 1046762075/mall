@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.firenay.mall.product.dao.AttrAttrgroupRelationDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.firenay.mall.product.entity.AttrAttrgroupRelationEntity" id="attrAttrgroupRelationMap">
+        <result property="id" column="id"/>
+        <result property="attrId" column="attr_id"/>
+        <result property="attrGroupId" column="attr_group_id"/>
+        <result property="attrSort" column="attr_sort"/>
+    </resultMap>
+
+    <!-- 发送批量删除语句 -->
+    <delete id="deleteBatchRelation">
+        DELETE FROM `pms_attr_attrgroup_relation` WHERE
+        <foreach collection="entities" item="item" separator=" OR ">
+            (attr_id = #{item.attrId} AND attr_group_id = #{item.attrGroupId})
+        </foreach>
+    </delete>
+</mapper>
