@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: mall-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        # \u8BF7\u6C42\u53C2\u6570\u4E2D\u5E26\u4E86 baidu \u5C31\u53BB\u8F6C\u53D1\u5230 http://www.baidu.com
+    gateway:
+      routes:
+        - id: test_route
+          uri: http://www.baidu.com
+          predicates:
+            - Query=url,baidu
+        - id: qq_route
+          uri: http://www.qq.com
+          predicates:
+            - Query=url,qq
+        # lb: \u8D1F\u8F7D\u5747\u8861
+        - id: product_route
+          uri: lb://mall-product
+        # \u5C06\u539F\u6765\u5E26api\u7684\u8BF7\u6C42 \u8F6C\u6362\u6210 product/...
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+        - id: member_route
+          uri: lb://mall-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+        - id: ware_route
+          uri: lb://mall-ware
+          predicates:
+            - Path=/api/ware/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+        #  OSS签名的转发
+        - id: third_party_route
+          uri: lb://mall-third-party
+          predicates:
+            - Path=/api/third/party/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+        - id: admin_route
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /renren-fast/$\{segment}
+## \u524D\u7AEF\u9879\u76EE, \u90FD\u5E26\u4E0A /api
+
+server:
+  port: 88
