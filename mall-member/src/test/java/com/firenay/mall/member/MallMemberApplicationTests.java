@@ -1,4 +1,4 @@
-package com.firenay.leave.member;
+package com.firenay.mall.member;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
