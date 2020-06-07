@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        const person = {
+            name: "jack",
+            age: 21,
+            language: ['java', 'js', 'css']
+        }
+
+        console.log(Object.keys(person));//["name", "age", "language"]
+        console.log(Object.values(person));//["jack", 21, Array(3)]
+        console.log(Object.entries(person));//[Array(2), Array(2), Array(2)]
+
+        const target = { a: 1 };
+        const source1 = { b: 2 };
+        const source2 = { c: 3 };
+
+        //{a:1,b:2,c:3}
+        Object.assign(target, source1, source2);
+
+        console.log(target);//["name", "age", "language"]
+
+        //2）、声明对象简写
+        const age = 23
+        const name = "张三"
+        const person1 = { age: age, name: name }
+
+        const person2 = { age, name }
+        console.log(person2);
+
+        //3）、对象的函数属性简写
+        let person3 = {
+            name: "jack",
+            // 以前：
+            eat: function (food) {
+                console.log(this.name + "在吃" + food);
+            },
+            //箭头函数this不能使用，对象.属性
+            eat2: food => console.log(person3.name + "在吃" + food),
+            eat3(food) {
+                console.log(this.name + "在吃" + food);
+            }
+        }
+
+        person3.eat("香蕉");
+
+        person3.eat2("苹果")
+
+        person3.eat3("橘子");
+
+        //4）、对象拓展运算符
+
+        // 1、拷贝对象（深拷贝）
+        let p1 = { name: "Amy", age: 15 }
+        let someone = { ...p1 }
+        console.log(someone)  //{name: "Amy", age: 15}
+
+        // 2、合并对象
+        let age1 = { age: 15 }
+        let name1 = { name: "Amy" }
+        let p2 = {name:"zhangsan"}
+        p2 = { ...age1, ...name1 } 
+        console.log(p2)
+
+        
+
+    </script>
+</body>
+
+</html>

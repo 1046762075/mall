@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+
+        //数组解构
+        // let arr = [1,2,3];
+        // // let a = arr[0];
+        // // let b = arr[1];
+        // // let c = arr[2];
+
+        // let [a,b,c] = arr;
+
+        // console.log(a,b,c)
+
+
+        const person = {
+            name: "jack",
+            age: 21,
+            language: ['java', 'js', 'css']
+        }
+
+
+        //         const name = person.name;
+        //         const age = person.age;
+        //         const language = person.language;
+
+
+        //对象解构
+        const { name: abc, age, language } = person;
+
+        console.log(abc, age, language)
+
+        //4、字符串扩展
+
+        let str = "hello.vue";
+        console.log(str.startsWith("hello"));//true
+        console.log(str.endsWith(".vue"));//true
+        console.log(str.includes("e"));//true
+        console.log(str.includes("hello"));//true
+
+
+        //字符串模板
+        let ss = `<div>
+                    <span>hello world<span>
+                </div>`;
+        console.log(ss);
+
+        //  // 2、字符串插入变量和表达式。变量名写在 ${} 中，${} 中可以放入 JavaScript 表达式。
+
+        function fun() {
+            return "这是一个函数"
+        }
+
+        let info = `我是${abc}，今年${age + 10}了, 我想说： ${fun()}`;
+        console.log(info);
+
+
+
+    </script>
+</body>
+
+</html>
