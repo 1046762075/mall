@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.firenay.mall.ware.dao.WareSkuDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.firenay.mall.ware.entity.WareSkuEntity" id="wareSkuMap">
+        <result property="id" column="id"/>
+        <result property="skuId" column="sku_id"/>
+        <result property="wareId" column="ware_id"/>
+        <result property="stock" column="stock"/>
+        <result property="skuName" column="sku_name"/>
+        <result property="stockLocked" column="stock_locked"/>
+    </resultMap>
+    <!-- 更新库存 -->
+    <insert id="addStock">
+        UPDATE `wms_ware_sku` SET stock = stock + #{skuNum} WHERE sku_id = #{skuId} AND ware_id = #{wareId}
+    </insert>
+</mapper>
