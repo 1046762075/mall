@@ -1,4 +1,4 @@
-package com.firenay.leave.order;
+package com.firenay.mall.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
