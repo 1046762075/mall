@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://10.43.1.52:3306/mall_pms?serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  # 指定返回时间的格式化
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      # 配置逻辑删除 1代表删除 0代表已删除
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+server:
+  port: 10001
+logging:
+  level:
+    com.firenay.mall.product: debug
