@@ -1,0 +1,23 @@
+ipAddr: 10.43.1.52
+spring:
+  application:
+    name: mall-auth-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8333
+  thymeleaf:
+    cache: false
+  session:
+    store-type: redis
+  redis:
+    host: ${ipAddr}
+server:
+  port: 20000
+  # session存活时间
+  servlet:
+    session:
+      timeout: 30m
