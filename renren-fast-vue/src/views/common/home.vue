@@ -15,6 +15,15 @@
       <li>项目Git地址：<a href="https://github.com/1046762075/mall" target="_blank">https://github.com/1046762075/mall</a></li>
       <li>代码生成器：<a href="http://127.0.0.1:81/" target="_blank">FIRENAY_CODE</a></li>
     </ul>
+    <h3>ES安装</h3>
+    <h5><a href="https://raw.githubusercontent.com/elastic/elasticsearch/master/docs/src/test/resources/accounts.json">ElasticSearch测试文档[开启科学上网]</a></h5>
+    <ul>
+      <li>mkdir -p /mydocker/mall/elasticsearch/config</li>
+      <li>mkdir -p /mydocker/mall/elasticsearch/data</li>
+      <li>mkdir -p /mydocker/mall/elasticsearch/plugins</li>
+      <li>echo "http.host: 0.0.0.0" >> /mydocker/mall/elasticsearch/config/elasticsearch.yml</li>
+      <li>chmod -R 777 /mydocker/mall/elasticsearch/</li>
+    </ul>
   </div>
 </template>
 
