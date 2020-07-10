@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>员工列表</title>
+</head>
+<body>
+  <h1>欢迎：[[${session.user}]]</h1>
+
+  <ul>
+    <li th:text="'姓名：' + ${emp}" th:each="emp : ${session.emps}"></li>
+  </ul>
+</body>
+</html>
