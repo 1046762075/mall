@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: mall-search
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8333
+  thymeleaf:
+    cache: false
+  session:
+    store-type: redis
+  redis:
+    host: ${ipAddr}
+#ipAddr: 120.79.50.189
+ipAddr: 10.43.1.52
+server:
+  port: 12000
