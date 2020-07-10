@@ -1,0 +1,13 @@
+spring:
+  thymeleaf:
+    cache: false
+    prefix: "classpath:/templates/"
+    suffix: .html
+  redis:
+    host: 10.43.1.52
+
+sso:
+  server:
+    url: http://ssoserver.com:8080/login.html
+server:
+  port: 80
