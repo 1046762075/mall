@@ -1,19 +1,20 @@
 package com.firenay.mall.member.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.firenay.common.utils.PageUtils;
+import com.firenay.common.utils.R;
+import com.firenay.mall.member.entity.MemberReceiveAddressEntity;
+import com.firenay.mall.member.service.MemberReceiveAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.firenay.mall.member.entity.MemberReceiveAddressEntity;
-import com.firenay.mall.member.service.MemberReceiveAddressService;
-import com.firenay.common.utils.PageUtils;
-import com.firenay.common.utils.R;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -27,8 +28,14 @@ import com.firenay.common.utils.R;
 @RestController
 @RequestMapping("member/memberreceiveaddress")
 public class MemberReceiveAddressController {
+
     @Autowired
     private MemberReceiveAddressService memberReceiveAddressService;
+
+	@GetMapping("/{memberId}/addresses")
+	public List<MemberReceiveAddressEntity> getAddress(@PathVariable("memberId") Long memberId){
+		return memberReceiveAddressService.getAddress(memberId);
+	}
 
     /**
      * 列表
@@ -46,7 +53,6 @@ public class MemberReceiveAddressController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    //@RequiresPermissions("member:memberreceiveaddress:info")
     public R info(@PathVariable("id") Long id){
 		MemberReceiveAddressEntity memberReceiveAddress = memberReceiveAddressService.getById(id);
 
@@ -57,10 +63,15 @@ public class MemberReceiveAddressController {
      * 保存
      */
     @RequestMapping("/save")
-    //@RequiresPermissions("member:memberreceiveaddress:save")
     public R save(@RequestBody MemberReceiveAddressEntity memberReceiveAddress){
 		memberReceiveAddressService.save(memberReceiveAddress);
-
+		memberReceiveAddress.setCity("长沙");
+		memberReceiveAddress.setPhone("xxx-xxxx-xxxx");
+		memberReceiveAddress.setProvince("湖南");
+		memberReceiveAddress.setDetailAddress("雨花区 西丽街道");
+		memberReceiveAddress.setDefaultStatus(1);
+		memberReceiveAddress.setName("FIRE");
+		memberReceiveAddress.setId(1L);
         return R.ok();
     }
 
@@ -85,5 +96,4 @@ public class MemberReceiveAddressController {
 
         return R.ok();
     }
-
 }

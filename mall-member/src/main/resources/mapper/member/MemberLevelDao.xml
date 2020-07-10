@@ -16,6 +16,9 @@
         <result property="priviledgeBirthday" column="priviledge_birthday"/>
         <result property="note" column="note"/>
     </resultMap>
-
+    <select id="getDefaultLevel" resultType="com.firenay.mall.member.entity.MemberLevelEntity">
+        SELECT * FROM `ums_member_level`
+        WHERE default_status = 1
+    </select>
 
 </mapper>
