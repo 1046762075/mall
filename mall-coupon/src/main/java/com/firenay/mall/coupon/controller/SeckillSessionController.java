@@ -1,19 +1,20 @@
 package com.firenay.mall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.firenay.common.utils.PageUtils;
+import com.firenay.common.utils.R;
+import com.firenay.mall.coupon.entity.SeckillSessionEntity;
+import com.firenay.mall.coupon.service.SeckillSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.firenay.mall.coupon.entity.SeckillSessionEntity;
-import com.firenay.mall.coupon.service.SeckillSessionService;
-import com.firenay.common.utils.PageUtils;
-import com.firenay.common.utils.R;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -27,8 +28,15 @@ import com.firenay.common.utils.R;
 @RestController
 @RequestMapping("coupon/seckillsession")
 public class SeckillSessionController {
+
     @Autowired
     private SeckillSessionService seckillSessionService;
+
+    @GetMapping("/lates3DaySession")
+    public R getLate3DaySession(){
+		List<SeckillSessionEntity> seckillSessionEntities = seckillSessionService.getLate3DaySession();
+		return R.ok().setData(seckillSessionEntities);
+	}
 
     /**
      * 列表

@@ -1,11 +1,13 @@
 package com.firenay.mall.coupon.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
+import java.util.List;
 
 /**
  * 秒杀活动场次
@@ -45,4 +47,6 @@ public class SeckillSessionEntity implements Serializable {
 	 */
 	private Date createTime;
 
+	@TableField(exist = false)
+	private List<SeckillSkuRelationEntity> relationSkus;
 }

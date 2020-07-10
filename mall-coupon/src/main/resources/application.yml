@@ -8,8 +8,20 @@
 #    nacos:
 #      discovery:
 #        server-addr: 127.0.0.1:8848
+#    sentinel:
+#      transport:
+#        dashboard: localhost:8333
 #  application:
 #    name: mall-coupon
+#  zipkin:
+#    base-url: 10.43.1.52:9411/
+#    # 关闭我们自动的服务发现功能
+#    discovery-client-enabled: false
+#    sender:
+#      type: web
+#  sleuth:
+#    sampler:
+#      probability: 1
 #mybatis-plus:
 #  mapper-locations: classpath:/mapper/**/*.xml
 #  global-config:
