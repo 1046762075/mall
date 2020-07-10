@@ -54,6 +54,12 @@
         <dependency>
             <groupId>com.firenay.leave</groupId>
             <artifactId>mall-common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.alibaba.cloud</groupId>
+                    <artifactId>spring-cloud-starter-alicloud-oss</artifactId>
+                </exclusion>
+            </exclusions>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
