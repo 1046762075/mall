@@ -4,7 +4,9 @@ import com.firenay.common.utils.PageUtils;
 import com.firenay.common.utils.R;
 import com.firenay.mall.ware.entity.WareInfoEntity;
 import com.firenay.mall.ware.service.WareInfoService;
+import com.firenay.mall.ware.vo.FareVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +31,12 @@ public class WareInfoController {
 
     @Autowired
     private WareInfoService wareInfoService;
+
+    @GetMapping("/fare")
+    public R getFare(@RequestParam("addrId") Long addrId){
+		FareVo fare = wareInfoService.getFare(addrId);
+    	return R.ok().setData(fare);
+	}
 
     /**
      * 列表

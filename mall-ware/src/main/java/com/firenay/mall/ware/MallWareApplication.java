@@ -2,6 +2,7 @@ package com.firenay.mall.ware;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -11,10 +12,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * <p>Title: MallWareApplication</p>
- * Description：仓储模块
+ * Description：仓储模块		第一次启动报了RabbitMQ相关的error别慌 这是RabbitMQ正在创建队列 、交换机、绑定信息 还没刷新导致的
  * date：2020/6/6 20:49
  */
 
+@EnableRabbit
 @EnableFeignClients
 @EnableTransactionManagement
 @EnableDiscoveryClient
@@ -36,4 +38,13 @@ public class MallWareApplication {
         paginationInterceptor.setLimit(1000);
 		return paginationInterceptor;
 	}
+
+//	@Bean
+//	public DataSource dataSource(DataSourceProperties dataSourceProperties){
+//		HikariDataSource dataSource = dataSourceProperties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
+//		if(StringUtils.hasText(dataSourceProperties.getName())){
+//			dataSource.setPoolName(dataSourceProperties.getName());
+//		}
+//		return new DataSourceProxy(dataSource);
+//	}
 }

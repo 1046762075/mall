@@ -2,10 +2,11 @@ package com.firenay.mall.ware.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
-import lombok.Data;
 
 /**
  * 库存工作单
@@ -14,6 +15,8 @@ import lombok.Data;
  * @email 1046762075@qq.com
  * @date 2020-06-06 21:09:28
  */
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @TableName("wms_ware_order_task_detail")
 public class WareOrderTaskDetailEntity implements Serializable {

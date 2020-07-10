@@ -16,4 +16,21 @@
     <insert id="addStock">
         UPDATE `wms_ware_sku` SET stock = stock + #{skuNum} WHERE sku_id = #{skuId} AND ware_id = #{wareId}
     </insert>
+
+    <update id="lockSkuStock">
+        UPDATE `wms_ware_sku` SET stock_locked = stock_locked + #{num}
+        WHERE sku_id = #{skuId} AND ware_id = #{wareId} AND stock-stock_locked >= #{num}
+    </update>
+    <update id="unlockStock">
+        UPDATE `wms_ware_sku` SET stock_locked = stock_locked - #{num}
+        WHERE sku_id = #{skuId} AND ware_id = #{wareId}
+    </update>
+    <!-- 查询是否有库存 -->
+    <select id="getSkuStock" resultType="java.lang.Long">
+        SELECT SUM(stock - stock_locked) FROM `wms_ware_sku` WHERE sku_id = #{id}
+    </select>
+
+    <select id="listWareIdHasSkuStock" resultType="java.lang.Long">
+        SELECT ware_id FROM `wms_ware_sku` WHERE sku_id = #{skuId} AND stock - stock_locked > 0
+    </select>
 </mapper>
