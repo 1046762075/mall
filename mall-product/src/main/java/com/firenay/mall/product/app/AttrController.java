@@ -1,4 +1,4 @@
-package com.firenay.mall.product.controller;
+package com.firenay.mall.product.app;
 
 import com.firenay.common.utils.PageUtils;
 import com.firenay.common.utils.R;
@@ -74,7 +74,9 @@ public class AttrController {
     @RequestMapping("/info/{attrId}")
     public R info(@PathVariable("attrId") Long attrId){
 		AttrRespVo respVo = attrService.getAttrInfo(attrId);
-        return R.ok().put("attr", respVo);
+		R ok = R.ok();
+		ok.put("data", respVo);
+        return ok.put("attr", respVo);
     }
 
     /**
@@ -96,13 +98,13 @@ public class AttrController {
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
-    @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] attrIds){
+	/**
+	 * 删除
+	 */
+	@RequestMapping("/delete")
+	public R delete(@RequestBody Long[] attrIds){
 		attrService.removeByIds(Arrays.asList(attrIds));
 
-        return R.ok();
-    }
+		return R.ok();
+	}
 }

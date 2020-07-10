@@ -16,5 +16,9 @@
         <result property="showDesc" column="show_desc"/>
     </resultMap>
 
-
+    <select id="selectSearchAttrIds" resultType="java.lang.Long">
+        SELECT attr_id FROM `pms_attr` WHERE attr_id IN 
+        <foreach collection="attrIds" item="id" separator="," open="(" close=")"> #{id} </foreach>
+        AND search_type = 1
+    </select>
 </mapper>

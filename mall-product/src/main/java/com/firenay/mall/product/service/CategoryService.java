@@ -3,6 +3,7 @@ package com.firenay.mall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.firenay.common.utils.PageUtils;
 import com.firenay.mall.product.entity.CategoryEntity;
+import com.firenay.mall.product.vo.Catelog2Vo;
 
 import java.util.List;
 import java.util.Map;
@@ -32,5 +33,8 @@ public interface CategoryService extends IService<CategoryEntity> {
 	 */
 	void updateCascade(CategoryEntity category);
 
+	List<CategoryEntity> getLevel1Categorys();
+
+	Map<String, List<Catelog2Vo>> getCatelogJson();
 }
 

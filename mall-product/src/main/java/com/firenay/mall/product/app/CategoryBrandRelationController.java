@@ -1,4 +1,4 @@
-package com.firenay.mall.product.controller;
+package com.firenay.mall.product.app;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.firenay.common.utils.PageUtils;

@@ -1,4 +1,4 @@
-package com.firenay.mall.product.controller;
+package com.firenay.mall.product.app;
 
 import java.util.Arrays;
 import java.util.Map;

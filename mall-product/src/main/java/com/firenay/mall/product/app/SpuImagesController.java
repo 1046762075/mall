@@ -1,9 +1,9 @@
-package com.firenay.mall.product.controller;
+package com.firenay.mall.product.app;
 
 import com.firenay.common.utils.PageUtils;
 import com.firenay.common.utils.R;
-import com.firenay.mall.product.entity.SkuImagesEntity;
-import com.firenay.mall.product.service.SkuImagesService;
+import com.firenay.mall.product.entity.SpuImagesEntity;
+import com.firenay.mall.product.service.SpuImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,46 +15,49 @@ import java.util.Arrays;
 import java.util.Map;
 
 /**
- * sku图片
+ * spu图片
  *
  * @author firenay
  * @email 1046762075@qq.com
  * @date 2020-05-31 17:06:04
  */
 @RestController
-@RequestMapping("product/skuimages")
-public class SkuImagesController {
+@RequestMapping("product/spuimages")
+public class SpuImagesController {
 
     @Autowired
-    private SkuImagesService skuImagesService;
+    private SpuImagesService spuImagesService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = skuImagesService.queryPage(params);
+        PageUtils page = spuImagesService.queryPage(params);
 
         return R.ok().put("page", page);
     }
+
 
     /**
      * 信息
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		SkuImagesEntity skuImages = skuImagesService.getById(id);
+		SpuImagesEntity spuImages = spuImagesService.getById(id);
 
-        return R.ok().put("skuImages", skuImages);
+        return R.ok().put("spuImages", spuImages);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody SkuImagesEntity skuImages){
-		skuImages.setImgSort(0);
-		skuImagesService.save(skuImages);
+    public R save(@RequestBody SpuImagesEntity spuImages){
+		String[] split = spuImages.getImgUrl().split("_");
+		spuImages.setImgName(split[split.length-1]);
+		spuImages.setImgSort(0);
+		spuImagesService.save(spuImages);
         return R.ok();
     }
 
@@ -62,8 +65,8 @@ public class SkuImagesController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody SkuImagesEntity skuImages){
-		skuImagesService.updateById(skuImages);
+    public R update(@RequestBody SpuImagesEntity spuImages){
+		spuImagesService.updateById(spuImages);
 
         return R.ok();
     }
@@ -73,7 +76,7 @@ public class SkuImagesController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] ids){
-		skuImagesService.removeByIds(Arrays.asList(ids));
+		spuImagesService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

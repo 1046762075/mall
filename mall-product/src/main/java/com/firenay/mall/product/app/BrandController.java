@@ -1,5 +1,4 @@
-package com.firenay.mall.product.controller;
-
+package com.firenay.mall.product.app;
 
 import com.firenay.common.utils.PageUtils;
 import com.firenay.common.utils.R;
@@ -10,6 +9,7 @@ import com.firenay.mall.product.entity.BrandEntity;
 import com.firenay.mall.product.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,6 +52,12 @@ public class BrandController {
 		BrandEntity brand = brandService.getById(brandId);
 
 		return R.ok().put("brand", brand);
+	}
+
+	@GetMapping("/infos")
+	public R info(@RequestParam("brandIds") List<Long> brandIds) {
+		List<BrandEntity> brand = brandService.getBrandByIds(brandIds);
+		return R.ok().put("data", brand);
 	}
 
 	/**

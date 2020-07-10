@@ -1,11 +1,16 @@
 package com.firenay.mall.product;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.firenay.mall.product.dao.AttrGroupDao;
+import com.firenay.mall.product.dao.SkuSaleAttrValueDao;
 import com.firenay.mall.product.entity.BrandEntity;
 import com.firenay.mall.product.service.BrandService;
 import com.firenay.mall.product.service.CategoryService;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RedissonClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -19,6 +24,43 @@ public class MallProductApplicationTests {
 	@Resource
 	private CategoryService categoryService;
 
+	@Resource
+	private RedissonClient RedissonClient;
+
+	@Resource
+	private StringRedisTemplate StringRedisTemplate;
+
+	@Resource
+	private AttrGroupDao attrGroupDao;
+
+	@Resource
+	private SkuSaleAttrValueDao skuSaleAttrValueDao;
+
+	@Test
+	public void testRedisson(){
+		System.out.println(RedissonClient);
+	}
+
+	@Test
+	public void attrGroupTest(){
+		System.out.println(attrGroupDao.getAttrGroupWithAttrsBySpuId(225L,3L));
+	}
+
+	@Test
+	public void SkuSaleAttrValueTest(){
+		System.out.println(skuSaleAttrValueDao.getSaleAttrsBuSpuId(3L));
+	}
+
+	@Test
+	public void testRedis(){
+		// 写入 redis
+		ValueOperations<String, String> operations = StringRedisTemplate.opsForValue();
+		operations.set("redis","firenay");
+		
+		// 读取redis值
+		String redis = operations.get("redis");
+		System.out.println("读取到的类型：" + redis);
+	}
 	/**
 	 * 查找父节点的路径
 	 */

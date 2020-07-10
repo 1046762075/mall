@@ -1,4 +1,4 @@
-package com.firenay.mall.product.controller;
+package com.firenay.mall.product.app;
 
 import com.firenay.common.utils.R;
 import com.firenay.mall.product.entity.CategoryEntity;

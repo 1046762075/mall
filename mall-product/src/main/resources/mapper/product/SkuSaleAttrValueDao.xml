@@ -13,5 +13,20 @@
         <result property="attrSort" column="attr_sort"/>
     </resultMap>
 
-
+    <resultMap id="SkuItemSaleAttrVo" type="com.firenay.mall.product.vo.ItemSaleAttrVo">
+        <result column="attr_id" property="attrId"></result>
+        <result column="attr_name" property="attrName"></result>
+        <collection property="attrValues" ofType="com.firenay.mall.product.vo.AttrValueWithSkuIdVo">
+            <result column="attr_value" property="attrValue"></result>
+            <result column="sku_ids" property="skuIds"></result>
+        </collection>
+    </resultMap>
+    <select id="getSaleAttrsBuSpuId" resultMap="SkuItemSaleAttrVo">
+        SELECT ssav.`attr_id`,ssav.`attr_name`,ssav.`attr_value`,GROUP_CONCAT(DISTINCT info.`sku_id`) sku_ids
+        FROM `pms_sku_info` INFO LEFT JOIN `pms_sku_sale_attr_value` ssav ON ssav.`sku_id` = info.`sku_id`
+        WHERE info.`spu_id` = #{spuId} GROUP BY ssav.`attr_id`,ssav.`attr_name`,ssav.`attr_value`
+    </select>
+    <select id="getSkuSaleAttrValuesAsStringList" resultType="java.lang.String">
+        SELECT CONCAT(attr_name,":",attr_value) FROM `pms_sku_sale_attr_value` WHERE sku_id = #{skuId};
+    </select>
 </mapper>

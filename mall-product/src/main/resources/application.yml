@@ -1,16 +1,39 @@
+ipAddr: 10.43.1.52
 spring:
   datasource:
     username: root
-    password: 123456
-    url: jdbc:mysql://10.43.1.52:3306/mall_pms?serverTimezone=Asia/Shanghai
+    password: mq0000
+    url: jdbc:mysql://${ipAddr}:3306/mall_pms?serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8333
   # 指定返回时间的格式化
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    cache: false
+    suffix: .html
+    prefix: classpath:/templates/
+  session:
+    store-type: redis
+  redis:
+    host: ${ipAddr}
+#   设置缓存类型
+  cache:
+    type: redis
+#   设置存活时间
+    redis:
+      time-to-live: 3600000
+#      如果指定了前缀就用我们指定的 如果没有就用缓存的名字作为前缀
+#      key-prefix: CACHE_
+#      是否缓存空值
+      cache-null-values: true
+#    cache-names:
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
@@ -23,4 +46,16 @@ server:
   port: 10001
 logging:
   level:
-    com.firenay.mall.product: debug
+    com.firenay.mall.product: error
+#    org.springframework.cloud.openfeign: debug
+#    org.springframework.cloud.sleuth: debug
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+
+glmall:
+  thread:
+    core-size: 20
+    max-size: 200
+    keep-alive-time: 10

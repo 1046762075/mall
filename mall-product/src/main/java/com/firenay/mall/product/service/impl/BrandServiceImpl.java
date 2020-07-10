@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 
@@ -51,5 +52,10 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
 			// TODO 更新其它关联
 
 		}
+	}
+
+	@Override
+	public List<BrandEntity> getBrandByIds(List<Long> brandIds) {
+		return baseMapper.selectList(new QueryWrapper<BrandEntity>().in("brand_id",brandIds));
 	}
 }

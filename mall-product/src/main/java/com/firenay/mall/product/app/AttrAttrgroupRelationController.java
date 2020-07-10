@@ -1,10 +1,9 @@
-package com.firenay.mall.product.controller;
+package com.firenay.mall.product.app;
 
 import com.firenay.common.utils.PageUtils;
 import com.firenay.common.utils.R;
-import com.firenay.mall.product.entity.SpuInfoEntity;
-import com.firenay.mall.product.service.SpuInfoService;
-import com.firenay.mall.product.vo.SpuSaveVo;
+import com.firenay.mall.product.entity.AttrAttrgroupRelationEntity;
+import com.firenay.mall.product.service.AttrAttrgroupRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,45 +15,47 @@ import java.util.Arrays;
 import java.util.Map;
 
 /**
- * spu信息
+ * 属性&属性分组关联
  *
  * @author firenay
  * @email 1046762075@qq.com
  * @date 2020-05-31 17:06:04
  */
 @RestController
-@RequestMapping("product/spuinfo")
-public class SpuInfoController {
+@RequestMapping("product/attrattrgrouprelation")
+public class AttrAttrgroupRelationController {
 
     @Autowired
-    private SpuInfoService spuInfoService;
+    private AttrAttrgroupRelationService attrAttrgroupRelationService;
 
     /**
-     * spu管理的查询
+     * 列表
      */
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = spuInfoService.queryPageByCondition(params);
+        PageUtils page = attrAttrgroupRelationService.queryPage(params);
 
         return R.ok().put("page", page);
     }
+
 
     /**
      * 信息
      */
     @RequestMapping("/info/{id}")
     public R info(@PathVariable("id") Long id){
-		SpuInfoEntity spuInfo = spuInfoService.getById(id);
+		AttrAttrgroupRelationEntity attrAttrgroupRelation = attrAttrgroupRelationService.getById(id);
 
-        return R.ok().put("spuInfo", spuInfo);
+        return R.ok().put("attrAttrgroupRelation", attrAttrgroupRelation);
     }
 
     /**
-     * 大保存
+     * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody SpuSaveVo vo){
-		spuInfoService.saveSpuInfo(vo);
+    public R save(@RequestBody AttrAttrgroupRelationEntity attrAttrgroupRelation){
+		attrAttrgroupRelationService.save(attrAttrgroupRelation);
+
         return R.ok();
     }
 
@@ -62,8 +63,8 @@ public class SpuInfoController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody SpuInfoEntity spuInfo){
-		spuInfoService.updateById(spuInfo);
+    public R update(@RequestBody AttrAttrgroupRelationEntity attrAttrgroupRelation){
+		attrAttrgroupRelationService.updateById(attrAttrgroupRelation);
 
         return R.ok();
     }
@@ -72,11 +73,9 @@ public class SpuInfoController {
      * 删除
      */
     @RequestMapping("/delete")
-    //@RequiresPermissions("${moduleNamez}:spuinfo:delete")
     public R delete(@RequestBody Long[] ids){
-		spuInfoService.removeByIds(Arrays.asList(ids));
+		attrAttrgroupRelationService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }
-
 }

@@ -21,6 +21,7 @@ import com.firenay.mall.product.vo.AttrGroupRelationVo;
 import com.firenay.mall.product.vo.AttrRespVo;
 import com.firenay.mall.product.vo.AttrVo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -121,6 +122,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 		return pageUtils;
 	}
 
+	@Cacheable(value = "attr", key = "'attrinfo:' + #root.args[0]")
 	@Transactional
 	@Override
 	public AttrRespVo getAttrInfo(Long attrId) {
@@ -248,5 +250,13 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
 		PageUtils pageUtils = new PageUtils(page);
 		return pageUtils;
+	}
+
+	/**
+	 * SELECT attr_id FROM `pms_attr` WHERE attr_id IN (?) AND search_type = 1
+	 */
+	@Override
+	public List<Long> selectSearchAttrIds(List<Long> attrIds) {
+		return baseMapper.selectSearchAttrIds(attrIds);
 	}
 }
