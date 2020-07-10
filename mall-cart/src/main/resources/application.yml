@@ -1,0 +1,22 @@
+ipAddr: 10.43.1.52
+spring:
+  application:
+    name: mall-cart
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8333
+  session:
+    store-type: redis
+  redis:
+    host: ${ipAddr}
+server:
+  port: 40000
+glmall:
+  thread:
+    core-size: 20
+    max-size: 200
+    keep-alive-time: 10
