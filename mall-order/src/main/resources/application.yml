@@ -1,13 +1,87 @@
+ipAddr: 10.43.1.52
+server:
+  port: 9000
 spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8333
+  application:
+    name: mall-order
   datasource:
     username: root
-    password: 123456
-    url: jdbc:mysql://10.43.1.52:3306/mall_oms
+    password: mq0000
+    url: jdbc:mysql://${ipAddr}:3306/mall_oms
     driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  session:
+    store-type: redis
+  redis:
+    host: ${ipAddr}
+  rabbitmq:
+    host: ${ipAddr}
+    port: 5672
+    # 指定虚拟主机
+    virtual-host: /
+    username: guest
+    password: guest
+    # 开启发送端确认
+    publisher-confirms: true
+    #　开启发送端消息抵达队列确认
+    publisher-returns: true
+    # 只要抵达队列，以异步优先回调我们这个 returnconfirm
+    template:
+      mandatory: true
+    # 手动ack消息 消息不容易丢失
+    listener:
+      simple:
+        acknowledge-mode: manual
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+  zipkin:
+    base-url: ${ipAddr}:9411/
+    # 关闭我们自动的服务发现功能
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
     db-config:
       id-type: auto
-server:
-  port: 9000
+myRabbitmq:
+  queue: mall-queue
+  exchange: mall-exchange
+  routeKey: mall
+  MQConfig:
+    # 订单队列
+    queues: order.release.order.queue
+    delayQueue: order.delay.queue
+    eventExchange: order-event-exchange
+    routingKey: order.release.order
+    createOrder: order.create.order
+    # 订单自动过期时间 单位:(毫秒)
+    ttl: 900000
+    # 库存解锁队列
+    ReleaseOther: stock.release.stock.queue
+    ReleaseOtherKey: order.release.other
+glmall:
+  thread:
+    core-size: 20
+    max-size: 200
+    keep-alive-time: 10
+alipay:
+  app_id: 2016102100732649
+  # 支付宝异步回调通知 这个来感应订单是否完成
+  notify_url: http://sthwsr.natappfree.cc/payed/notify
+  return_url: http://member.glmall.com/memberOrder.html
+  timeout: 15m

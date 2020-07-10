@@ -49,5 +49,9 @@
         <result property="modifyTime" column="modify_time"/>
     </resultMap>
 
+    <!-- 修改订单状态 -->
+    <update id="updateOrderStatus">
+        UPDATE `oms_order` SET `status` = #{code} WHERE order_sn = #{orderSn}
+    </update>
 
 </mapper>
