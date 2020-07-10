@@ -1,0 +1,36 @@
+ipAddr: 10.43.1.52
+server:
+  port: 25000
+
+spring:
+  application:
+    name: mall-seckill
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8333
+        port: 8719
+  redis:
+    host: ${ipAddr}
+  session:
+    store-type: redis
+  rabbitmq:
+    virtual-host: /
+    host: ${ipAddr}
+  thymeleaf:
+    cache: false
+  task:
+    execution:
+      pool:
+        core-size: 5
+        max-size: 50
+    #    scheduling:
+    #      pool:
+    #        size: 5
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug
+    org.springframework.cloud.sleuth: debug

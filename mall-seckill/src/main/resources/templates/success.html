@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>[[${orderSn != null?'秒杀成功':'秒杀失败'}]]</title>
+  <script type="text/javascript" src="/static/seckill/js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="/static/seckill/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/static/seckill/js/swiper.min.js"></script>
+  <script src="/static/seckill/js/swiper.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/seckill/css/swiper.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/seckill/bootstrap/css/bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/seckill/css/success.css"/>
+
+</head>
+
+<body>
+<!--头部-->
+<div class="alert-info">
+  <div class="hd_wrap_top">
+    <ul class="hd_wrap_left">
+      <li class="hd_home"><i class="glyphicon glyphicon-home"></i>
+        <a href="http://glmall.com">谷粒商城首页</a>
+      </li>
+    </ul>
+    <ul class="hd_wrap_right">
+      <li class="forel" th:if="${session.loginUser} ==null">
+        <a href="http://auth.glmall.com/login.html" class="link_login">你好,请登录</a>&nbsp;
+        <a href="http://auth.glmall.com/reg.html" class="link_regist">免费注册</a>
+      </li>
+
+      <li class="forel" th:if="${session.loginUser} !=null">
+        <a class="link_login" style="width: 100px">[[${session.loginUser.username}]]</a>&nbsp;
+        <a href="http://auth.glmall.com/oauth2.0/logout" class="link_regist">退出登录</a>
+      </li>
+      <li class="spacer"></li>
+      <li>
+        <a href="">我的订单</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="nav-tabs-justified">
+  <div class="nav_wrap">
+
+    <div class="nav_top">
+      <div class="nav_top_one">
+        <a href="http://glmall.com"><img src="/static/seckill/img/logo1.jpg" style="height: 60px;width:180px;"/></a>
+      </div>
+      <div class="nav_top_two"><input type="text"/>
+        <button>搜索</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="success-wrap">
+    <div class="w" id="result">
+      <div class="m succeed-box">
+        <div th:if="${orderSn != null}" class="mc success-cont">
+          <div class="success-lcol">
+            <div class="success-top"><b class="succ-icon"></b>
+              <h3 class="ftx-02">商品秒杀成功 订单号: [[${orderSn}]]</h3></div>
+            <div class="p-item">
+              <div class="clr"></div>
+            </div>
+          </div>
+          <div class="success-btns success-btns-new">
+            <div class="success-ad">
+              <a href="#none"></a>
+            </div>
+            <div class="clr"></div>
+            <div class="bg_shop">
+              <a class="btn-addtocart" th:href="'http://order.glmall.com/payOrder?orderSn=' + ${orderSn}" id="GotoShoppingCart"><b></b>去支付</a>
+            </div>
+          </div>
+        </div>
+
+        <div th:if="${orderSn == null}" class="mc success-cont">
+          <div class="success-lcol">
+            <div class="success-top"><b class="succ-icon"></b>
+              <h3 class="ftx-02">秒杀失败</h3></div>
+            <div class="p-item">
+              <div class="p-img">
+                <a href="" target="_blank"></a>
+              </div>
+              <div class="p-info">
+                <div class="p-name">
+                </div>
+                <div class="p-extra"><span class="txt" ></span></div>
+              </div>
+              <div class="clr"></div>
+            </div>
+          </div>
+          <div class="success-btns success-btns-new">
+            <div class="success-ad">
+              <a href="#none"></a>
+            </div>
+            <div class="clr"></div>
+            <div class="bg_shop">
+              <a class="btn-addtocart" href="http://glmall.com" id="GotoShoppingCart"><b></b>去购物</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="/static/seckill/js/success.js"></script>
+</html>
