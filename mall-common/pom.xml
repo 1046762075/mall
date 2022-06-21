@@ -11,7 +11,7 @@
 
     <properties>
         <commons.lang.version>2.6</commons.lang.version>
-        <mysql.version>8.0.17</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <javax.servlet.version>2.5</javax.servlet.version>
     </properties>
 
